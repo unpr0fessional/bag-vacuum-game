@@ -1,6 +1,6 @@
 'use strict';
 const QA_MODE = new URLSearchParams(location.search).has('qa');
-const GAME_VERSION = '1.0.2';
+const GAME_VERSION = '1.0.3';
 const ASSET_REVISION = new URL(document.currentScript.src).searchParams.get('v') || GAME_VERSION;
 /* =============================================================================
    СУМКА-ПЫЛЕСОС
@@ -93,7 +93,9 @@ const CONFIG = {
   items:   { scale: 1.35 },   // предметы крупнее реальных, чтобы их было видно с камеры
   player:  { speed: 2.0, radius: 0.24, startX: 0.38, startZ: 0.82, turnSharpness: 12, jumpSpeed: 3.8, gravity: 16 },
   hose: {
-    reach: 2.1,          // максимум: как далеко от героини может быть сопло (по горизонтали)
+    length: 2.5,         // неизменная полная длина: сумка → ладонь → сопло
+    rearLength: 1.15,    // участок от сумки до удерживаемого рукой участка
+    gripLength: .17,     // прямой участок между пальцами и ладонью
     minReach: 0.45,      // минимум: сопло не может залезть «в неё»
     hover: 0.05,         // сопло парит над поверхностью на этой высоте
     radius: 0.026,       // толщина шланга
@@ -797,8 +799,9 @@ loadRealCharacter();
 loadRealBag();
 
 // шланг: кривая через контрольные точки → TubeGeometry
-const hoseCurve = new THREE.CatmullRomCurve3([new V3(), new V3(0, 1, 0), new V3(0, 2, 0), new V3(0, 3, 0)], false, 'centripetal');
-const HOSE_SEGMENTS = 64, HOSE_SIDES = 8;
+const hoseCurve = new FixedLengthHoseCurve();
+const hoseState = { outOfReach: false, length: CONFIG.hose.length, rearLength: 0, frontLength: 0 };
+const HOSE_SEGMENTS = 128, HOSE_SIDES = 8;
 const hoseGeometry = new THREE.TubeGeometry(hoseCurve, HOSE_SEGMENTS, CONFIG.hose.radius, HOSE_SIDES, false);
 hoseGeometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
 hoseGeometry.attributes.normal.setUsage(THREE.DynamicDrawUsage);
@@ -826,6 +829,8 @@ const tipTarget = tip.clone();
 
 const _v1 = new V3(), _v2 = new V3(), _v3 = new V3();
 const hosePoint = new V3(), hoseNormal = new V3();
+const hoseOutlet = new V3(), hoseHand = new V3(), hoseAxis = new V3(), hoseForward = new V3(), hoseDesired = new V3();
+const hosePose = { outlet: hoseOutlet, hand: hoseHand, axis: hoseAxis, front: hoseForward, target: hoseDesired };
 function deformHose() {
   // Reuse GPU buffers rather than constructing/discarding a tube every frame.
   hoseCurve.updateArcLengths();
@@ -871,27 +876,35 @@ function updateBagAndHose(dt) {
   // Opening and straps retain their attachment points while the lower bag expands.
   bag.group.updateMatrixWorld(true);
 
-  // контрольные точки шланга
-  const out = bagOutletWorld(_v2.set(0, 0, 0)).clone();
-  const hand = hero.armL.hand.getWorldPosition(_v3).clone();
-  const front = new V3(-Math.sin(player.yaw),0,-Math.cos(player.yaw));
-  const p1 = out.clone().lerp(hand, .28).addScaledVector(front,.15);
-  p1.y = Math.max(.15,Math.min(out.y,hand.y)-.06);
-  const p2 = out.clone().lerp(hand, .68).addScaledVector(front,.14);
-  p2.y = out.y+(hand.y-out.y)*.60;
-  const tipAbove = tip.clone(); tipAbove.y += 0.13;
-  const mid = hand.clone().lerp(tipAbove, 0.5); mid.y = Math.max(mid.y, tipAbove.y) + 0.06;
+  bagOutletWorld(hoseOutlet);
+  hero.armL.hand.getWorldPosition(hoseHand);
+  hoseForward.set(-Math.sin(player.yaw), 0, -Math.cos(player.yaw));
   if (hero.armL.hand.userData.gripAxis) {
-    const axis = hero.armL.hand.userData.gripAxis.clone().transformDirection(hero.armL.hand.matrixWorld);
-    if (axis.dot(tipAbove.clone().sub(hand)) < 0) axis.negate();
-    // A short straight section passes between the curled fingers and palm.
-    // The remaining hose stays flexible on both sides of that held section.
-    hoseCurve.points = [out, p1, p2, hand.clone().addScaledVector(axis, -.085), hand, hand.clone().addScaledVector(axis, .085), mid, tipAbove, tip.clone()];
-  } else hoseCurve.points = [out, p1, p2, hand, mid, tipAbove, tip.clone()];
+    hoseAxis.copy(hero.armL.hand.userData.gripAxis).transformDirection(hero.armL.hand.matrixWorld);
+    if (hoseAxis.dot(hoseForward) < 0) hoseAxis.negate();
+  } else hoseAxis.copy(hoseForward);
+  Object.assign(hosePose, { length: CONFIG.hose.length, rearLength: CONFIG.hose.rearLength, gripLength: CONFIG.hose.gripLength });
+
+  // Solve in 3D using the current bag and palm anchors. Slack becomes a bend;
+  // neither walking nor a jump can add material to either side of the grip.
+  hoseDesired.copy(tipTarget);
+  let solved = hoseCurve.solve(hosePose);
+  aimOutOfReach = solved.outOfReach;
+  if (dt > 0) {
+    tip.x = damp(tip.x, solved.tip.x, 18, dt);
+    tip.z = damp(tip.z, solved.tip.z, 18, dt);
+    tip.y = damp(tip.y, solved.tip.y, 18, dt);
+  } else tip.copy(solved.tip);
+  // Raise over the table edge before reapplying the length limit. The second
+  // solve also prevents a lagging nozzle stretching the hose as the hand moves.
+  tip.y = Math.max(tip.y, surfaceHeightAt(tip.x, tip.z) + CONFIG.hose.hover);
+  hoseDesired.copy(tip);
+  solved = hoseCurve.solve(hosePose);
+  tip.copy(solved.tip);
+  Object.assign(hoseState, { outOfReach: aimOutOfReach, length: solved.length, rearLength: solved.rearLength, frontLength: solved.frontLength });
 
   deformHose();
-  const hoseLength = hoseCurve.getLength();
-  hoseRibs.count = Math.min(260, Math.floor(hoseLength / CONFIG.hose.ribSpacing));
+  hoseRibs.count = Math.min(260, Math.floor(CONFIG.hose.length / CONFIG.hose.ribSpacing));
   for(let i=0;i<hoseRibs.count;i++) {
     const u=(i+.5)/hoseRibs.count;
     ribObject.position.copy(hoseCurve.getPointAt(u));
@@ -1278,12 +1291,12 @@ function computeAimTarget(out) {
     else if (raycaster.ray.intersectPlane(floorPlane, out)) aimedY = surfaceHeightAt(out.x, out.z);
     else { out.copy(tipTarget); aimedY = tipTarget.y - CONFIG.hose.hover; }
   }
-  // ограничение по длине шланга
+  // Keep the requested aim outside the body. The actual reach is constrained
+  // later from the animated hand, including the vertical distance to the floor.
   let dx = out.x - player.pos.x, dz = out.z - player.pos.z;
   let len = Math.hypot(dx, dz);
   if (len < 1e-4) { dx = -Math.sin(player.yaw); dz = -Math.cos(player.yaw); len = 1; }
-  aimOutOfReach = len > CONFIG.hose.reach + 0.05;
-  const r = clamp(len, CONFIG.hose.minReach, CONFIG.hose.reach);
+  const r = Math.max(len, CONFIG.hose.minReach);
   out.x = player.pos.x + dx / len * r;
   out.z = player.pos.z + dz / len * r;
   // Высота сопла = высота того, на что указывает курсор. Если целишься в стол, а шланг
@@ -1437,7 +1450,7 @@ function updatePlayer(dt) {
   hero.legs[1].rotation.x = -swing;
   hero.armR.shoulder.rotation.x = -swing * 0.10;
   // левая рука тянется к шлангу: чем дальше сопло, тем выше рука
-  const reach01 = clamp((Math.hypot(dx, dz) - CONFIG.hose.minReach) / (CONFIG.hose.reach - CONFIG.hose.minReach), 0, 1);
+  const reach01 = clamp((Math.hypot(dx, dz) - CONFIG.hose.minReach) / (CONFIG.hose.length - CONFIG.hose.rearLength - CONFIG.hose.gripLength), 0, 1);
   hero.armL.shoulder.rotation.x = 0.08 + reach01 * 0.12;
   hero.armL.shoulder.rotation.z = -0.06;
 }
@@ -1734,6 +1747,7 @@ function showIntro(finished = false) {
     <p class="dim">по видео «сумкапылесос» · практика 9 · версия ${GAME_VERSION}</p>
     ${finished ? '<p><b>Все уровни пройдены.</b></p>' : ''}
     <p>Деньги, золото, ключи. Собери заказ со стола. Лишнее забивает сумку — не переполни её.</p>
+    <p>Шланг — 2,5 метра. К дальним вещам нужно подойти.</p>
     <p class="dim">WASD — идти · пробел — прыгать<br>ПКМ + мышь — обзор во все стороны<br>Курсор — сопло · ЛКМ / F — пылесос<br>Колесо — расстояние · V — камера за спиной<br>M — игровой обзор · P — пауза</p>
     <p class="desktop-note">Для игры нужны клавиатура и мышь.</p>`, [
     { label: 'играть', onClick: () => { startLevel(0); } },
@@ -1752,12 +1766,9 @@ function step(dt) {
   updatePlayer(dt);
   updateCamera(dt);
 
-  // сопло плавно следует за прицелом; вверх (на стол) поднимается сразу, чтобы не проходить сквозь край
+  // Keep the raw cursor target; updateBagAndHose constrains and smooths it using
+  // this frame's hand and bag positions.
   computeAimTarget(tipTarget);
-  tip.x = damp(tip.x, tipTarget.x, 18, dt);
-  tip.z = damp(tip.z, tipTarget.z, 18, dt);
-  const wantY = Math.max(tipTarget.y, surfaceHeightAt(tip.x, tip.z) + CONFIG.hose.hover);
-  tip.y = wantY > tip.y ? wantY : damp(tip.y, wantY, 14, dt);
 
   const sucking = isSucking();
   if (sucking !== wasSucking) { Sound.setSuction(sucking); wasSucking = sucking; }
@@ -1815,7 +1826,7 @@ frame();
 window.GAME = {
   version: GAME_VERSION, revision: ASSET_REVISION,
   CONFIG, ITEM_TYPES, LEVELS, game, player, camState, assets,
-  camera, scene, renderer, hero, bag, hoseMesh, hoseRibs, pbr, input,
+  camera, scene, renderer, hero, bag, hoseMesh, hoseRibs, hoseCurve, hoseState, pbr, input,
   get items() { return items; },
   get tip() { return tip.clone(); },
   start: startLevel,

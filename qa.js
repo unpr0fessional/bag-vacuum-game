@@ -280,10 +280,10 @@
       const pixels=visibleObjectPixels(keys.mesh,800);assert(pixels>8,`keys do not render at original placement for seed ${seed}: ${pixels} pixels`);
     }
   });
-  run('level 2 completes from the original table layout, including keys, without moving or hiding items',()=>{
-    seededLevel(1,104);GAME.camState.yaw=0;
+  for(let level=0;level<3;level++)run(`level ${level+1}: walk to collect the original layout without moving or hiding items`,()=>{
+    seededLevel(level,104+level);GAME.camState.yaw=0;
     const walkTo=(x,z)=>{
-      for(let tick=0;tick<150;tick++){
+      for(let tick=0;tick<180;tick++){
         GAME.input.keys.clear();const dx=x-GAME.player.pos.x,dz=z-GAME.player.pos.z;
         if(Math.hypot(dx,dz)<.035)return;
         if(Math.abs(dx)>.018)GAME.input.keys.add(dx>0?'KeyD':'KeyA');
@@ -292,21 +292,65 @@
       }
       throw new Error('could not walk to the table through the room');
     };
-    // Walk around the chair into the narrow space in front of the table.
-    // Neither character nor item positions are assigned by this regression.
-    walkTo(.2,.26);walkTo(GAME.CONFIG.table.x,.26);GAME.input.keys.clear();
-    const targets=GAME.items.filter(it=>it.isTarget).sort((a,b)=>(a.key==='keys'?-1:0)-(b.key==='keys'?-1:0));
+    // Approach the table by the clear side of the chair; then actually walk
+    // along its front for each pickup. No character or item teleportation.
+    walkTo(.2,.26);GAME.input.keys.clear();
+    const targets=GAME.items.filter(it=>it.isTarget).sort((a,b)=>b.mesh.position.x-a.mesh.position.x);
     for(const item of targets){
+      walkTo(Math.max(-1.55,Math.min(-.35,item.mesh.position.x+.40)),.26);
+      GAME.input.keys.clear();GAME.input.keys.add('KeyW');frames(35);GAME.input.keys.clear();
       GAME.aim(item.mesh.position.x,item.mesh.position.z);frames(25);
-      for(let pulse=0;item.state!=='hose'&&item.state!=='bagged'&&pulse<8;pulse++){
+      for(let pulse=0;item.state!=='hose'&&item.state!=='bagged'&&pulse<14;pulse++){
         GAME.input.keys.add('KeyF');frames(1);GAME.input.keys.delete('KeyF');
       }
-      assert(item.state==='hose'||item.state==='bagged',`${item.key} cannot be picked up in the unmodified layout`);
+      assert(item.state==='hose'||item.state==='bagged',`${item.key} cannot be picked up after approaching its original position (distance ${GAME.tip.distanceTo(item.mesh.position).toFixed(3)})`);
       frames(40);assert(item.state==='bagged',`${item.key} did not arrive in the bag`);
     }
-    assert(GAME.game.state==='won','unaltered level 2 could not be completed');
-    assert(GAME.game.collected.keys===1,'level 2 keys were not counted');
+    assert(GAME.game.state==='won',`unaltered level ${level+1} could not be completed`);
+    if(level===1)assert(GAME.game.collected.keys===1,'level 2 keys were not counted');
     assert(GAME.game.mistakes===0,'unintended extra collected while targeting actual item positions');
+  });
+  run('distant target cannot be collected while standing at the start',()=>{
+    seededLevel(0,410);const start=GAME.player.pos.clone();
+    const item=GAME.items.filter(it=>it.isTarget).sort((a,b)=>b.mesh.position.distanceTo(start)-a.mesh.position.distanceTo(start))[0];
+    const position=item.mesh.position.clone();GAME.aim(position.x,position.z);frames(50);
+    assert(GAME.hoseState.outOfReach,'distant aim should ask the player to approach');
+    GAME.suck(true);frames(120);GAME.suck(false);
+    assert(item.state==='rest'&&item.mesh.position.distanceTo(position)<.005,'distant item was pulled without approaching');
+    assert(GAME.player.pos.distanceTo(start)<1e-9,'stationary reach test moved the character');
+    assert(GAME.tip.distanceTo(item.mesh.position)>GAME.CONFIG.suction.pullRadius,'nozzle reaches distant target');
+  });
+  run('hose keeps its complete length, fixed rib count and attachments during aiming, walking and jumping',()=>{
+    GAME.start(0);GAME.camState.yaw=0;GAME.player.pos.set(.7,0,1.3);frames(30);
+    const expected=GAME.CONFIG.hose.length,ribs=GAME.hoseRibs.count;
+    let maxRenderedError=0;
+    for(let tick=0;tick<300;tick++){
+      GAME.input.keys.clear();GAME.input.keys.add(['KeyW','KeyD','KeyS','KeyA'][Math.floor(tick/75)]);
+      const a=tick*.11,r=tick%60<30?.5:6;
+      GAME.aim(GAME.player.pos.x+Math.sin(a)*r,GAME.player.pos.z+Math.cos(a)*r);
+      if(tick%70===0)keyEvent('keydown','Space');if(tick%70===2)keyEvent('keyup','Space');
+      GAME.game.fill=GAME.game.capacity*(tick%100)/105;frames(1);
+      const points=GAME.hoseCurve.points;let length=0;
+      for(let i=1;i<points.length;i++)length+=points[i].distanceTo(points[i-1]);
+      assert(Math.abs(length-expected)<.0001,`hose stretched: ${length}`);
+      assert(GAME.hoseRibs.count===ribs,'hose grows or loses corrugation rings');
+      const world=o=>o.getWorldPosition(new THREE.Vector3());
+      assert(points[0].distanceTo(world(GAME.bag.outlet))<.00001,'hose detached from bag');
+      assert(points.at(-1).distanceTo(GAME.tip)<.00001,'nozzle detached from hose');
+      const grip=GAME.hoseCurve.samples;
+      assert(points[grip].clone().lerp(points[grip+1],.5).distanceTo(world(GAME.hero.armL.hand))<.00001,'hose slips out of gripping hand');
+      assert(points.every(p=>p.toArray().every(Number.isFinite)&&p.y>=.025),'hose crossed floor or became invalid');
+      const geometry=GAME.hoseMesh.geometry,radial=geometry.parameters.radialSegments,segments=geometry.parameters.tubularSegments;
+      let drawn=0,prior=null;const v=new THREE.Vector3();
+      for(let ring=0;ring<=segments;ring++){
+        const centre=new THREE.Vector3();for(let j=0;j<radial;j++)centre.add(v.fromBufferAttribute(geometry.attributes.position,ring*(radial+1)+j));centre.multiplyScalar(1/radial);
+        if(prior)drawn+=centre.distanceTo(prior);prior=centre;
+      }
+      maxRenderedError=Math.max(maxRenderedError,Math.abs(drawn-expected));
+      assert(Math.abs(drawn-expected)<.012,`rendered tube length changed: ${drawn}`);
+    }
+    GAME.input.keys.clear();keyEvent('keyup','Space');
+    console.info('Maximum rendered hose length error, metres:',maxRenderedError);
   });
   run('clean view keeps the lost-level menu and HUD restore button accessible',()=>{
     GAME.start(0);document.body.classList.add('clean-view');GAME.game.timeLeft=.01;frames(2);
