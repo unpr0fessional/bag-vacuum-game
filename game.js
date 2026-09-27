@@ -1,6 +1,6 @@
 'use strict';
 const QA_MODE = new URLSearchParams(location.search).has('qa');
-const GAME_VERSION = '1.0.3';
+const GAME_VERSION = '1.0.4';
 const ASSET_REVISION = new URL(document.currentScript.src).searchParams.get('v') || GAME_VERSION;
 /* =============================================================================
    СУМКА-ПЫЛЕСОС
@@ -1017,7 +1017,7 @@ function spawnLevelItems(level) {
 }
 
 function isSucking() {
-  return game.state === 'playing' && (input.mouseDown || input.keys.has('KeyF'));
+  return game.state === 'playing' && (input.mouseDown || input.mobileSuction || input.keys.has('KeyF'));
 }
 
 function updateItems(dt) {
@@ -1179,12 +1179,17 @@ const input = {
   keys: new Set(), mouseNdc: new THREE.Vector2(0, 0),
   hasAim: false, mouseDown: false, rightDrag: false,
   lastX: 0, lastY: 0, locked: false, dragLook: false, debugAim: null,
+  touchMode: false, mobileMove: { x: 0, y: 0 }, mobileSuction: false, touchTarget: null,
 };
+let mobileControls = null;
+let touchHelpPausedGame = false;
 const canvas = renderer.domElement;
 canvas.tabIndex = 0;
 canvas.setAttribute('aria-label', 'Игровая сцена. WASD — движение, пробел — прыжок, мышь — обзор, ЛКМ или F — пылесос.');
 function clearInput() {
   input.keys.clear(); input.mouseDown = false; input.rightDrag = false;
+  input.mobileMove.x = input.mobileMove.y = 0; input.mobileSuction = false;
+  mobileControls?.reset();
 }
 function orbitCamera(dx, dy) {
   camState.yaw -= dx * CONFIG.camera.sensitivity;
@@ -1213,8 +1218,26 @@ function cursorAim(e) {
   input.mouseNdc.set((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2);
   input.hasAim=true;
 }
+function touchAim(clientX, clientY) {
+  input.debugAim=null; input.touchTarget=null;
+  cursorAim({clientX,clientY});
+  // A small fingertip allowance makes thin keys and chains selectable. It
+  // changes only the requested aim; the fixed hose still limits actual reach.
+  let best=24;
+  const projected=new V3();
+  for(const item of items) {
+    if(item.state!=='rest' && item.state!=='pulled')continue;
+    projected.copy(item.mesh.position).project(camera);
+    if(projected.z< -1 || projected.z>1)continue;
+    const dx=(projected.x+1)*innerWidth*.5-clientX;
+    const dy=(1-projected.y)*innerHeight*.5-clientY;
+    const distance=Math.hypot(dx,dy);
+    if(distance<best){best=distance;input.touchTarget=item;}
+  }
+}
 canvas.addEventListener('contextmenu', e=>e.preventDefault());
 canvas.addEventListener('pointerdown', e=>{
+  if (e.pointerType === 'touch' || e.pointerType === 'pen') return;
   Sound.init(); canvas.focus({preventScroll:true});
   if (!input.locked && !input.dragLook) cursorAim(e);
   if (e.button===0 && game.state==='playing' && !input.dragLook) input.mouseDown=true;
@@ -1222,11 +1245,13 @@ canvas.addEventListener('pointerdown', e=>{
   if(!input.locked) try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
 });
 window.addEventListener('pointerup',e=>{
+  if (e.pointerType === 'touch' || e.pointerType === 'pen') return;
   if(e.button===0) input.mouseDown=false;
   if(e.button===2 || e.button===0) input.rightDrag=false;
 });
-canvas.addEventListener('lostpointercapture',()=>{input.rightDrag=false;input.mouseDown=false;});
+canvas.addEventListener('lostpointercapture',e=>{if(e.pointerType!=='touch'&&e.pointerType!=='pen'){input.rightDrag=false;input.mouseDown=false;}});
 window.addEventListener('pointermove',e=>{
+  if (e.pointerType === 'touch' || e.pointerType === 'pen') return;
   if(input.locked) { orbitCamera(e.movementX,e.movementY); input.mouseNdc.set(0,0);input.hasAim=true; }
   else if(input.rightDrag) { orbitCamera(e.clientX-input.lastX,e.clientY-input.lastY);input.lastX=e.clientX;input.lastY=e.clientY;if(input.dragLook){input.mouseNdc.set(0,0);input.hasAim=true;} }
   else if(e.target===canvas&&!input.dragLook) cursorAim(e);
@@ -1284,6 +1309,9 @@ function computeAimTarget(out) {
   } else if (input.debugAim) {
     out.set(input.debugAim.x, 0, input.debugAim.z);
     aimedY = surfaceHeightAt(out.x, out.z);
+  } else if (input.touchMode && input.touchTarget && ['rest','pulled'].includes(input.touchTarget.state)) {
+    out.copy(input.touchTarget.mesh.position);
+    aimedY=surfaceHeightAt(out.x,out.z);
   } else {
     raycaster.setFromCamera(input.mouseNdc, camera);
     const hit = raycaster.intersectObject(tableTopMesh, false)[0];
@@ -1311,7 +1339,9 @@ function computeAimTarget(out) {
    ========================================================================== */
 const camState = { yaw: .8, pitch: CONFIG.camera.pitch, distance: CONFIG.camera.distance, pos:new V3(),look:new V3() };
 function resetCamera() {
-  camState.yaw=player.yaw;camState.pitch=CONFIG.camera.pitch;camState.distance=CONFIG.camera.distance;
+  camState.yaw=player.yaw;
+  camState.pitch=input.touchMode ? .30 : CONFIG.camera.pitch;
+  camState.distance=input.touchMode ? 2.05 : CONFIG.camera.distance;
 }
 function updateCamera(dt,snap=false) {
   const C=CONFIG.camera;
@@ -1319,8 +1349,9 @@ function updateCamera(dt,snap=false) {
   if(input.keys.has('KeyE'))camState.yaw-=1.8*dt;
   const sy=Math.sin(camState.yaw),cy=Math.cos(camState.yaw);
   // Track part of the leap so the room stays readable without losing the head.
-  const lookHeight=C.lookHeight+player.pos.y*.55;
-  const pivot=new V3(player.pos.x+cy*C.shoulder,lookHeight,player.pos.z-sy*C.shoulder);
+  const lookHeight=(input.touchMode ? 1.04 : C.lookHeight)+player.pos.y*.55;
+  const shoulder=input.touchMode && innerWidth<innerHeight ? .20 : C.shoulder;
+  const pivot=new V3(player.pos.x+cy*shoulder,lookHeight,player.pos.z-sy*shoulder);
   const R=CONFIG.room,margin=.16;
   pivot.x=clamp(pivot.x,-R.halfW+.40,R.halfW-.40);
   pivot.z=clamp(pivot.z,-R.halfD+.40,R.halfD-.40);
@@ -1397,9 +1428,12 @@ function updatePlayer(dt) {
     if (k.has('KeyS') || k.has('ArrowDown')) fz -= 1;
     if (k.has('KeyD') || k.has('ArrowRight')) fx += 1;
     if (k.has('KeyA') || k.has('ArrowLeft')) fx -= 1;
+    fx += input.mobileMove.x;
+    fz -= input.mobileMove.y;
   }
   const len = Math.hypot(fx, fz);
-  if (len > 0) { fx /= len; fz /= len; }
+  // Preserve analog speed for small thumb movements; diagonal travel stays capped.
+  if (len > 1) { fx /= len; fz /= len; }
   // «вперёд» камеры = (-sin yaw, -cos yaw); «вправо» = (cos yaw, -sin yaw)
   const sy = Math.sin(camState.yaw), cy = Math.cos(camState.yaw);
   const vx = (-sy * fz + cy * fx) * CONFIG.player.speed;
@@ -1517,6 +1551,7 @@ function renderOrder() {
 
 function updateHUD() {
   document.body.dataset.state = game.state;
+  mobileControls?.refresh();
   const t = Math.max(0, game.timeLeft);
   const mm = Math.floor(t / 60), ss = Math.floor(t % 60).toString().padStart(2, '0');
   el.stats.innerHTML = `<div class="cap">время</div><div class="timer ${t < 10 ? 'low' : ''}">${mm}:${ss}</div>` +
@@ -1529,6 +1564,15 @@ function updateHUD() {
   el.fillLevel.className = 'level' + (ratio > 0.92 ? ' danger' : ratio > 0.8 ? ' warn' : '');
   el.fillPct.textContent = Math.round(ratio * 100) + '%';
   el.fillNeed.style.bottom = (game.need / game.capacity * 100) + '%';   // зелёная черта: столько займёт весь заказ
+  el.fill.style.setProperty('--fill-percent', Math.min(100, ratio * 100) + '%');
+  el.fill.style.setProperty('--need-percent', Math.min(100, game.need / game.capacity * 100) + '%');
+  if (input.touchMode) {
+    const reticle = document.getElementById('reticle');
+    const aim=input.touchTarget && ['rest','pulled'].includes(input.touchTarget.state)
+      ? input.touchTarget.mesh.position.clone().project(camera) : input.mouseNdc;
+    reticle.style.left = ((aim.x + 1) * 50) + '%';
+    reticle.style.top = ((1 - aim.y) * 50) + '%';
+  }
 
   el.hint.style.display = (game.state === 'playing' && aimOutOfReach) ? 'block' : 'none';
 
@@ -1650,8 +1694,9 @@ function startLevel(index, silent = false) {
   const L = LEVELS[index];
   game.levelIndex = index;
   game.state = 'playing';
+  touchHelpPausedGame = false;
   clearInput();
-  input.hasAim = false; input.debugAim = null;
+  input.hasAim = false; input.debugAim = null; input.touchTarget=null;
   document.getElementById('pause').textContent = 'пауза';
   game.timeLeft = L.time;
   game.fill = 0;
@@ -1677,6 +1722,7 @@ function startLevel(index, silent = false) {
   updateCamera(0, true);
   const aimNdc=tip.clone().project(camera);
   input.mouseNdc.set(aimNdc.x,aimNdc.y);
+  if (input.touchMode) input.hasAim = true;
 }
 
 function nextLevel() {
@@ -1709,6 +1755,7 @@ function endLevel(won, reason) {
 function togglePause() {
   if(!['playing','paused'].includes(game.state)) return;
   game.state = game.state === 'paused' ? 'playing' : 'paused';
+  if(game.state==='playing')touchHelpPausedGame=false;
   clearInput(); if(game.state==='paused') releaseMouseLook(); Sound.setSuction(false);
   document.getElementById('pause').textContent=game.state === 'paused' ? 'продолжить' : 'пауза';
   if (game.state === 'playing') { Sound.init(); canvas.focus({ preventScroll: true }); }
@@ -1748,8 +1795,8 @@ function showIntro(finished = false) {
     ${finished ? '<p><b>Все уровни пройдены.</b></p>' : ''}
     <p>Деньги, золото, ключи. Собери заказ со стола. Лишнее забивает сумку — не переполни её.</p>
     <p>Шланг — 2,5 метра. К дальним вещам нужно подойти.</p>
-    <p class="dim">WASD — идти · пробел — прыгать<br>ПКМ + мышь — обзор во все стороны<br>Курсор — сопло · ЛКМ / F — пылесос<br>Колесо — расстояние · V — камера за спиной<br>M — игровой обзор · P — пауза</p>
-    <p class="desktop-note">Для игры нужны клавиатура и мышь.</p>`, [
+    <p class="dim desktop-instructions">WASD — идти · пробел — прыгать<br>ПКМ + мышь — обзор во все стороны<br>Курсор — сопло · ЛКМ / F — пылесос<br>Колесо — расстояние · V — камера за спиной<br>M — игровой обзор · P — пауза</p>
+    <p class="dim touch-instructions">Джойстик слева — идти.<br>Свайп по комнате — поворачивать камеру.<br>Коснись предмета, чтобы навести сопло, и удерживай «Пылесос».<br>Кнопка «Прыжок» — прыгать.</p>`, [
     { label: 'играть', onClick: () => { startLevel(0); } },
     ...LEVELS.slice(1).map((L, i) => ({ label: `${i + 2}. ${L.name}`, ghost: true, onClick: () => { startLevel(i + 1); } })),
   ]);
@@ -1783,7 +1830,7 @@ function render() {
   renderer.setScissorTest(false);
   renderer.setViewport(0, 0, w, h);
   renderer.render(scene, camera);
-  if (game.state === 'intro' || document.body.classList.contains('clean-view')) return;
+  if (game.state === 'intro' || input.touchMode || document.body.classList.contains('clean-view')) return;
   // второй проход — «внутри сумки» в правом нижнем углу (координаты viewport считаются снизу)
   renderer.setScissorTest(true);
   renderer.setScissor(w - P.margin - P.w, P.margin, P.w, P.h);
@@ -1799,11 +1846,48 @@ function frame() {
   render();
 }
 
-window.addEventListener('resize', () => {
+function resizeGame() {
   layoutHUD();
+  // Keep phone GPU cost bounded, including when orientation changes.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, input.touchMode ? 1.25 : 1.5));
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
+  camera.fov = input.touchMode && camera.aspect < .9 ? 92 : CONFIG.camera.fov;
   camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resizeGame);
+
+mobileControls = window.createMobileControls({
+  canvas,
+  isPlaying: () => assets.ready && game.state === 'playing',
+  onMove: (x,y) => { input.mobileMove.x=x; input.mobileMove.y=y; },
+  onLook: (dx,dy) => { input.touchTarget=null; orbitCamera(dx*1.6,dy*1.6); },
+  onAim: touchAim,
+  onSuction: active => { input.mobileSuction=active; },
+  onJump: requestJump,
+  onPause: togglePause,
+  onToggleSound: () => Sound.toggleMute(),
+  onResetCamera: () => { clearInput(); resetCamera(); },
+  onInteract: () => Sound.init(),
+  onHelpChange: visible => {
+    if(visible && game.state==='playing') { togglePause(); touchHelpPausedGame=true; }
+    else if(!visible && touchHelpPausedGame) {
+      touchHelpPausedGame=false;
+      if(game.state==='paused')togglePause();
+    }
+  },
+  onModeChange: enabled => {
+    input.touchMode=enabled;
+    if (enabled) {
+      releaseMouseLook(); input.dragLook=false;
+      document.body.classList.remove('drag-look','clean-view');
+      canvas.setAttribute('aria-label','Игровая сцена. Джойстик слева — ходьба, свайп — камера, касание предмета — прицел. Кнопки справа — пылесос и прыжок.');
+    }
+    const pauseHint=document.querySelector('#pause-banner span');
+    if(pauseHint)pauseHint.textContent=enabled?'Нажми «продолжить» сверху':'P — продолжить';
+    resizeGame();
+    if(game.state==='playing')resetCamera();
+  },
 });
 
 // старт: раскладываем первый уровень «на фоне» и показываем заставку
@@ -1827,6 +1911,7 @@ window.GAME = {
   version: GAME_VERSION, revision: ASSET_REVISION,
   CONFIG, ITEM_TYPES, LEVELS, game, player, camState, assets,
   camera, scene, renderer, hero, bag, hoseMesh, hoseRibs, hoseCurve, hoseState, pbr, input,
+  get mobileControls() { return mobileControls; },
   get items() { return items; },
   get tip() { return tip.clone(); },
   start: startLevel,

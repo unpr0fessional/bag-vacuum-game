@@ -1,6 +1,6 @@
 {
   "name": "bag-vacuum-game",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "description": "A browser 3D game based on the author's bag-vacuum video.",
   "scripts": {

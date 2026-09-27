@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Сумка-пылесос — браузерная 3D-игра по авторскому видео. Собери заказ со стола, управляй героиней и не переполни сумку.">
 <meta name="theme-color" content="#192220">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23192220'/%3E%3Cpath d='M18 25h27l4 25H14l4-25Zm8 0v-6a6 6 0 0 1 12 0v6' fill='none' stroke='%23edf3ef' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M47 39c11 0 10-12 4-12' fill='none' stroke='%23c997ac' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -113,7 +113,7 @@
   #err{ position:fixed; left:0; right:0; top:0; background:#a0102a; color:#fff; padding:8px 12px; font-size:12px;
     display:none; z-index:99; white-space:pre-wrap; }
 </style>
-<link rel="stylesheet" href="look.css?v=1.0.3">
+<link rel="stylesheet" href="look.css?v=1.0.4">
 </head>
 <body>
 
@@ -125,7 +125,7 @@
     <p id="loading-status" role="status" aria-live="polite">Загружаем комнату и героиню…</p>
     <progress id="loading-progress" max="1" value="0" aria-label="Загрузка игры"></progress>
     <p class="loading-note">При первом запуске это займёт немного времени.</p>
-    <p class="desktop-note">Для игры нужны клавиатура и мышь.</p>
+    <p class="desktop-note">На телефоне: джойстик слева, действия справа.</p>
     <button id="loading-retry" type="button" hidden>попробовать снова</button>
   </div>
 </section>
@@ -154,9 +154,36 @@
   <button id="reset-view" type="button" title="V — камера за спиной" aria-keyshortcuts="V">за спину · V</button>
   <button id="pause" type="button" title="P — пауза" aria-keyshortcuts="P">пауза</button>
   <button id="sound-toggle" type="button" title="Включить или выключить звук" aria-label="Выключить звук" aria-pressed="false">звук: вкл</button>
+  <button id="mobile-help-toggle" type="button" title="Управление на телефоне" aria-label="Показать управление на телефоне" aria-expanded="false" aria-controls="mobile-coach">?</button>
   <button id="fullscreen" type="button" title="Полный экран" aria-label="Полный экран" aria-pressed="false">полный экран</button>
   <button id="hide-hud" type="button" title="H — скрыть или вернуть интерфейс" aria-keyshortcuts="H">чистый кадр</button>
 </div>
+<div id="mobile-controls" aria-label="Управление на телефоне" hidden>
+  <div id="move-stick" role="group" aria-label="Джойстик: двигай палец в нужную сторону">
+    <span class="stick-ring" aria-hidden="true"></span>
+    <span class="stick-arrow stick-up" aria-hidden="true">⌃</span>
+    <span class="stick-arrow stick-down" aria-hidden="true">⌄</span>
+    <span class="stick-arrow stick-left" aria-hidden="true">‹</span>
+    <span class="stick-arrow stick-right" aria-hidden="true">›</span>
+    <span id="move-knob" aria-hidden="true"></span>
+    <span class="stick-caption" aria-hidden="true">идти</span>
+  </div>
+  <button id="mobile-reset" type="button" aria-label="Вернуть камеру за спину">За спину</button>
+  <button id="mobile-jump" type="button" aria-label="Прыгнуть"><span aria-hidden="true">↑</span>Прыжок</button>
+  <button id="mobile-suction" type="button" aria-label="Удерживай, чтобы включить пылесос" aria-pressed="false">
+    <svg viewBox="0 0 32 32" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 7v8c0 5-4 5-4 9M17 24h9v4H15v-3M22 7h5V3h-9v4h4M11 8l-4 2M11 14H5M12 20l-4-2"/></svg>
+    <span data-suction-label>Пылесос</span><small>держи</small>
+  </button>
+</div>
+<section id="mobile-coach" aria-labelledby="mobile-coach-title" hidden>
+  <p class="cap">управление на телефоне</p>
+  <h2 id="mobile-coach-title">Всё под пальцами</h2>
+  <div class="coach-row"><span aria-hidden="true">↕</span><p><strong>Иди джойстиком слева</strong>Подходи ближе: шланг не растягивается.</p></div>
+  <div class="coach-row"><span aria-hidden="true">↔</span><p><strong>Води пальцем по сцене</strong>Так можно поворачивать камеру.</p></div>
+  <div class="coach-row"><span aria-hidden="true">◎</span><p><strong>Коснись нужного предмета</strong>Затем держи кнопку «Пылесос».</p></div>
+  <p class="coach-extra">«Прыжок» — прыгнуть · «За спину» — вернуть камеру.</p>
+  <button id="mobile-coach-close" type="button">Понятно, играем</button>
+</section>
 
 <script>
 // One tiny monochrome tile. CSS shifts the cached image; no per-frame JS or canvas work.
@@ -184,11 +211,12 @@
   window.addEventListener('resize', sizeGrain, { passive: true });
 })();
 </script>
-<script src="vendor/three.min.js?v=1.0.3"></script>
-<script src="vendor/GLTFLoader.js?v=1.0.3"></script>
-<script src="visuals.js?v=1.0.3"></script>
-<script src="fixed-hose.js?v=1.0.3"></script>
-<script src="game.js?v=1.0.3"></script>
+<script src="vendor/three.min.js?v=1.0.4"></script>
+<script src="vendor/GLTFLoader.js?v=1.0.4"></script>
+<script src="visuals.js?v=1.0.4"></script>
+<script src="fixed-hose.js?v=1.0.4"></script>
+<script src="mobile-input.js?v=1.0.4"></script>
+<script src="game.js?v=1.0.4"></script>
 
 </body>
 </html>

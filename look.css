@@ -114,3 +114,137 @@ body[data-state="paused"] #camera-grain{animation-play-state:paused}
   87.5%{transform:translate(-13px,29px)}
 }
 @media(prefers-reduced-motion:reduce){#camera-grain{animation:none}}
+
+/* Touch layout keeps the scene free between two thumb areas. */
+#mobile-controls,#mobile-coach,#mobile-help-toggle{display:none}
+.touch-instructions{display:none}
+body.touch-controls .desktop-instructions{display:none}
+body.touch-controls .touch-instructions{display:block}
+body.touch-controls{
+  --touch-left:max(14px,env(safe-area-inset-left));
+  --touch-right:max(14px,env(safe-area-inset-right));
+  --touch-top:max(12px,env(safe-area-inset-top));
+  --touch-bottom:max(22px,env(safe-area-inset-bottom));
+  overscroll-behavior:none;touch-action:none;-webkit-touch-callout:none;
+}
+body.touch-controls #help,body.touch-controls #pip,body.touch-controls #mouse-look,
+body.touch-controls #reset-view,body.touch-controls #hide-hud,
+body.touch-controls #fullscreen{display:none!important}
+body.touch-controls .desktop-note{display:block}
+body.touch-controls .panel{border-radius:10px;padding:9px 11px;background:rgba(237,243,239,.89)}
+body.touch-controls #order{top:var(--touch-top);left:var(--touch-left);min-width:0;width:184px;font-size:10px;line-height:1.3}
+body.touch-controls #order .cap{font-size:8px;letter-spacing:.09em}
+body.touch-controls #order .lvl{font-size:12px;margin:2px 0 4px}
+body.touch-controls #order .row{gap:7px}
+body.touch-controls #order .row span:last-child{flex-shrink:0;font-variant-numeric:tabular-nums}
+body.touch-controls #order .note{display:none}
+body.touch-controls #stats{top:var(--touch-top);right:var(--touch-right);min-width:0;width:85px;font-size:10px;line-height:1.3}
+body.touch-controls #stats .cap{font-size:8px;letter-spacing:.08em;margin-top:3px!important}
+body.touch-controls #stats .cap:first-child{margin-top:0!important}
+body.touch-controls #stats .timer{font-size:24px;font-variant-numeric:tabular-nums}
+body.touch-controls #view-controls{
+  top:calc(var(--touch-top) + 133px);bottom:auto;left:auto;right:var(--touch-right);
+  transform:none;width:auto;max-width:none;padding:0;gap:5px;flex-wrap:nowrap;z-index:12;
+}
+body.touch-controls #view-controls button{height:48px;min-width:48px;padding:0 10px;border-radius:12px;font-size:10px;letter-spacing:0;touch-action:none}
+body.touch-controls #mobile-help-toggle{display:block;font-size:19px!important;font-weight:600}
+body.touch-controls #view-controls #sound-toggle{font-size:9px;padding:0 8px}
+body.touch-controls[data-state="intro"] #view-controls,
+body.touch-controls[data-state="won"] #view-controls,
+body.touch-controls[data-state="lost"] #view-controls{top:var(--touch-top);left:auto;right:var(--touch-right);bottom:auto;transform:none;width:auto}
+body.touch-controls[data-state="intro"] #mobile-help-toggle,
+body.touch-controls[data-state="won"] #mobile-help-toggle,
+body.touch-controls[data-state="lost"] #mobile-help-toggle{display:none}
+body.touch-controls #fill{
+  left:var(--touch-left)!important;right:auto!important;top:calc(var(--touch-top) + 138px)!important;
+  bottom:auto!important;width:123px!important;height:35px!important;color:#eaf1ec;
+  background:#19251de6;border:1px solid #ffffff30;border-radius:10px;padding:7px;z-index:3;text-shadow:none;
+}
+body.touch-controls #fill .cap{top:5px;left:8px;right:auto;font-size:8px;line-height:1;letter-spacing:.06em}
+body.touch-controls #fill .pct{top:4px;bottom:auto;right:8px;left:auto;font-size:9px;line-height:1}
+body.touch-controls #fill .tube{left:8px;right:8px;top:auto;bottom:7px;height:5px;border:none;border-radius:6px;background:#ffffff25}
+body.touch-controls #fill .level{width:var(--fill-percent,0%);height:100%!important;right:auto;border-radius:6px;transition:width .25s,background .25s}
+body.touch-controls #fill .need{left:var(--need-percent,0%)!important;right:auto;bottom:0!important;top:0;width:2px;height:100%;background:#99cea8}
+body.touch-controls #mobile-controls{display:block;position:fixed;inset:0;z-index:10;pointer-events:none}
+body.touch-controls:not([data-state="playing"]) #mobile-controls{display:none!important}
+#mobile-controls button,#move-stick{pointer-events:auto;touch-action:none;-webkit-tap-highlight-color:transparent}
+#mobile-controls button{position:absolute;background:#1b2823eb;color:#f3f7f3;border:1px solid #eff8ec66;box-shadow:0 3px 18px #10221a24;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:12px;letter-spacing:0;min-height:48px}
+#move-stick{position:absolute;width:136px;height:136px;left:calc(var(--touch-left) + 2px);bottom:var(--touch-bottom);border:1px solid #ffffffa8;border-radius:50%;background:#1b28234d;box-shadow:inset 0 0 0 8px #ffffff09,0 3px 20px #10221a18;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.stick-ring{position:absolute;inset:25px;border:1px solid #eff8ec40;border-radius:50%}
+#move-knob{position:absolute;left:calc(50% - 24px);top:calc(50% - 24px);width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,#f6f9f1e8,#cfdbd1d9);border:1px solid #ffffffc4;box-shadow:0 3px 14px #12221b40;will-change:transform}
+#move-stick.is-active{background:#1b28236e;border-color:#f8fff2}
+#move-stick.is-active #move-knob{background:#f5faef;box-shadow:0 1px 18px #dff1cf45}
+.stick-arrow{position:absolute;font:19px/1 Arial,sans-serif;color:#f4f8ebaa;pointer-events:none}
+.stick-up{top:8px;left:calc(50% - 6px)}.stick-down{bottom:8px;left:calc(50% - 6px)}
+.stick-left{left:10px;top:calc(50% - 10px)}.stick-right{right:10px;top:calc(50% - 10px)}
+.stick-caption{position:absolute;left:0;right:0;bottom:-19px;text-align:center;color:#f8fff2;font-size:10px;text-shadow:0 1px 4px #15281b;letter-spacing:.05em}
+#mobile-suction{right:var(--touch-right);bottom:var(--touch-bottom);width:108px;height:108px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;padding:10px!important;background:#edf3eaf0!important;color:#1b2823!important;border:2px solid #ffffffb3!important;font-weight:600!important}
+#mobile-suction small{font-size:9px;line-height:1.1;font-weight:400;color:#52675b}
+#mobile-suction svg{margin-bottom:0}
+#mobile-suction.is-active{background:#bfd9c5!important;border-color:#f6fff1!important;box-shadow:0 0 0 5px #d1e8cd42,0 3px 18px #10221a24}
+#mobile-jump{right:calc(var(--touch-right) + 9px);bottom:calc(var(--touch-bottom) + 124px);width:90px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px}
+#mobile-jump span{font-size:23px;line-height:1}
+#mobile-jump:active,#mobile-reset:active{background:#4a6558}
+#mobile-reset{left:calc(var(--touch-left) + 18px);bottom:calc(var(--touch-bottom) + 153px);width:100px;height:48px;border-radius:14px;padding:8px;font-size:11px!important}
+body.touch-controls #hint{bottom:calc(var(--touch-bottom) + 221px);max-width:calc(100vw - 40px);font-size:11px;white-space:normal;text-align:center;z-index:9}
+body.touch-controls #toasts{top:calc(var(--touch-top) + 194px);z-index:9}
+body.touch-controls #hover{max-width:180px;white-space:normal;text-align:center;font-size:11px;z-index:9}
+body.touch-controls #reticle{display:none!important}
+body.touch-controls[data-state="playing"] #reticle{display:block!important;width:19px;height:19px;border:1.5px solid #ffffffe8;border-radius:50%;font-size:0;box-shadow:0 1px 4px #17221cb3,0 0 0 1px #1c2a2340;z-index:7}
+body.touch-controls[data-state="playing"] #reticle:after{content:"";position:absolute;left:6px;top:6px;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #17221c80}
+body.touch-controls #mobile-coach{
+  display:block;position:fixed;z-index:20;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(340px,calc(100vw - 28px));max-height:calc(100dvh - 44px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow:auto;padding:20px;background:#edf3edf7;border:1px solid #fff9;border-radius:18px;color:#192220;
+  box-shadow:0 16px 70px #12251b40;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);touch-action:pan-y;
+}
+#mobile-coach .cap{margin:0 0 6px;font-size:8px;letter-spacing:.12em}
+#mobile-coach h2{font-size:19px;line-height:1.25;margin:0 0 17px;font-weight:600;letter-spacing:-.04em}
+.coach-row{display:flex;gap:11px;align-items:flex-start;margin-bottom:14px}
+.coach-row>span{width:29px;height:29px;flex:none;background:#dce5db;border-radius:8px;text-align:center;font:23px/29px Arial,sans-serif;color:#3b5245}
+.coach-row p{font-size:10px;line-height:1.6;margin:0;color:#66736e}
+.coach-row strong{display:block;font-size:11px;line-height:1.5;font-weight:600;color:#192220}
+.coach-extra{font-size:10px;line-height:1.6;color:#66736e;margin:2px 0 17px}
+#mobile-coach-close{min-height:48px;width:100%;font-size:12px;font-weight:600;border-radius:12px;touch-action:manipulation}
+body.touch-controls #overlay{z-index:15;align-items:center;justify-content:center;padding:calc(var(--touch-top) + 56px) var(--touch-right) var(--touch-bottom) var(--touch-left)}
+body.touch-controls #overlay .card{width:min(370px,100%);border-radius:16px;padding:22px;max-height:calc(100dvh - 100px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;touch-action:pan-y;background:#eaf1ebeF}
+body.touch-controls #overlay h1{font-size:21px}
+body.touch-controls #overlay .btns{gap:9px;flex-wrap:wrap}
+body.touch-controls #overlay button{min-height:48px;min-width:96px;border-radius:10px;font-size:12px;font-weight:600;flex:1;touch-action:manipulation}
+body.touch-controls #pause-banner{top:53%;border-radius:14px;font-size:22px;padding:20px;max-width:calc(100vw - 40px);z-index:13}
+body.touch-controls #pause-banner span{font-size:11px;line-height:1.5}
+body.touch-controls.clean-view #view-controls{opacity:1}
+body.touch-controls.clean-view #view-controls button:not(#hide-hud){display:block}
+body.touch-controls.clean-view .panel,body.touch-controls.clean-view #fill{visibility:visible}
+@media(orientation:landscape) and (max-height:600px){
+  body.touch-controls{--touch-left:max(16px,env(safe-area-inset-left));--touch-right:max(16px,env(safe-area-inset-right));--touch-top:max(9px,env(safe-area-inset-top));--touch-bottom:max(19px,env(safe-area-inset-bottom))}
+  body.touch-controls #order{width:170px;font-size:9px;padding:8px 10px;line-height:1.35}
+  body.touch-controls #order .lvl{font-size:11px;margin:1px 0 2px}
+  body.touch-controls #order .cap{font-size:7px}
+  body.touch-controls #stats{width:77px;padding:8px 10px;font-size:9px}
+  body.touch-controls #stats .timer{font-size:22px}
+  body.touch-controls #view-controls{top:var(--touch-top);left:50%;right:auto;transform:translateX(-50%)}
+  body.touch-controls #fill{top:calc(var(--touch-top) + 58px)!important;left:50%!important;transform:translateX(-50%);width:140px!important;height:31px!important}
+  #move-stick{width:120px;height:120px}
+  #mobile-reset{left:calc(var(--touch-left) + 12px);bottom:calc(var(--touch-bottom) + 136px);width:96px}
+  #mobile-suction{width:94px;height:94px;font-size:11px!important;gap:1px}
+  #mobile-suction svg{width:26px;height:26px}
+  #mobile-jump{right:calc(var(--touch-right) + 3px);bottom:calc(var(--touch-bottom) + 108px);width:88px;height:48px}
+  body.touch-controls #hint{bottom:calc(var(--touch-bottom) + 18px);max-width:calc(100vw - 310px)}
+  body.touch-controls #toasts{top:calc(var(--touch-top) + 105px);width:calc(100vw - 340px)}
+  body.touch-controls #overlay{padding:calc(var(--touch-top) + 48px) var(--touch-right) 10px var(--touch-left)}
+  body.touch-controls #overlay .card{max-height:calc(100dvh - 74px - env(safe-area-inset-top));width:min(440px,100%);padding:17px 20px;font-size:11px;line-height:1.5}
+  body.touch-controls #overlay h1{font-size:18px}
+  body.touch-controls #overlay .btns{margin-top:11px}
+  body.touch-controls #mobile-coach{width:min(460px,calc(100vw - 100px));padding:16px 20px}
+  #mobile-coach h2{font-size:17px;margin-bottom:10px}
+  .coach-row{margin-bottom:8px}
+  .coach-extra{margin-bottom:9px}
+}
+@media(max-width:370px) and (orientation:portrait){
+  body.touch-controls #order{width:177px}
+  body.touch-controls #fill{width:110px!important}
+  body.touch-controls #view-controls{gap:4px}
+  body.touch-controls #view-controls button{padding:0 8px}
+}
+@media(prefers-reduced-motion:reduce){body.touch-controls #fill .level{transition:none}}
