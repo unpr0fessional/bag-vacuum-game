@@ -1,0 +1,19 @@
+{
+  "name": "bag-vacuum-game",
+  "version": "1.0.2",
+  "private": true,
+  "description": "A browser 3D game based on the author's bag-vacuum video.",
+  "scripts": {
+    "dev": "node scripts/serve.cjs",
+    "build": "node scripts/build.cjs",
+    "preview": "node scripts/serve.cjs --dir dist",
+    "test": "node scripts/test.cjs",
+    "test:install": "playwright install chromium"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
