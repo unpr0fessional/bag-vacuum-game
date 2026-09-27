@@ -30,7 +30,7 @@ function createGameServer(root = path.resolve(__dirname, '..')) {
       return respond(403, 'Forbidden');
     }
     const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
-    const allowed = /^(?:index\.html|game\.js|visuals\.js|look\.css|qa\.js|release-manifest\.json)$/.test(relative)
+    const allowed = /^(?:index\.html|game\.js|fixed-hose\.js|visuals\.js|look\.css|qa\.js|release-manifest\.json)$/.test(relative)
       || /^(?:assets|vendor|review)\//.test(relative);
     if (!allowed) return respond(404, 'Not found');
     const file = path.resolve(root, relative);
