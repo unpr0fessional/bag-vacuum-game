@@ -158,90 +158,94 @@
     "calls": 166,
     "triangles": 128016,
     "geometries": 211,
-    "textures": 25
+    "textures": 26
   },
   "runtimeVersions": {
-    "expected": "1.0.3",
+    "expected": "1.0.4",
     "requests": [
       {
         "path": "/look.css",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/vendor/three.min.js",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/vendor/GLTFLoader.js",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/visuals.js",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/fixed-hose.js",
-        "version": "1.0.3"
+        "version": "1.0.4"
+      },
+      {
+        "path": "/mobile-input.js",
+        "version": "1.0.4"
       },
       {
         "path": "/game.js",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/models/hero.glb",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/models/bag.glb",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/WoodFloor051-Color.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/WoodFloor051-NormalGL.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/WoodFloor051-Roughness.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Leather037-Color.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Leather037-NormalGL.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Leather037-Roughness.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Fabric030-Color.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Fabric030-NormalGL.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Fabric030-Roughness.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Plaster003-Color.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Plaster003-NormalGL.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       },
       {
         "path": "/assets/textures/Plaster003-Roughness.jpg",
-        "version": "1.0.3"
+        "version": "1.0.4"
       }
     ]
   },

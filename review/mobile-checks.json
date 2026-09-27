@@ -1,0 +1,820 @@
+{
+  "base": "http://127.0.0.1:8767/",
+  "passed": true,
+  "checks": [
+    {
+      "name": "phone: touch starts the level and shows usable controls",
+      "passed": true,
+      "detail": {
+        "w": 390,
+        "h": 844,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 16,
+            "y": 686,
+            "width": 136,
+            "height": 136,
+            "right": 152,
+            "bottom": 822
+          },
+          {
+            "id": "mobile-suction",
+            "x": 268,
+            "y": 714,
+            "width": 108,
+            "height": 108,
+            "right": 376,
+            "bottom": 822
+          },
+          {
+            "id": "mobile-jump",
+            "x": 277,
+            "y": 644,
+            "width": 90,
+            "height": 54,
+            "right": 367,
+            "bottom": 698
+          },
+          {
+            "id": "mobile-reset",
+            "x": 32,
+            "y": 621,
+            "width": 100,
+            "height": 48,
+            "right": 132,
+            "bottom": 669
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 328,
+            "y": 145,
+            "width": 48,
+            "height": 48,
+            "right": 376,
+            "bottom": 193
+          },
+          {
+            "id": "pause",
+            "x": 199.109375,
+            "y": 145,
+            "width": 52.109375,
+            "height": 48,
+            "right": 251.21875,
+            "bottom": 193
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 14,
+            "y": 12,
+            "width": 184,
+            "height": 88.375,
+            "right": 198,
+            "bottom": 100.375
+          },
+          {
+            "id": "stats",
+            "x": 291,
+            "y": 12,
+            "width": 85,
+            "height": 109.5625,
+            "right": 376,
+            "bottom": 121.5625
+          },
+          {
+            "id": "fill",
+            "x": 14,
+            "y": 150,
+            "width": 123,
+            "height": 35,
+            "right": 137,
+            "bottom": 185
+          }
+        ],
+        "bodyWidth": 390
+      }
+    },
+    {
+      "name": "phone: analogue stick moves relative to the camera and stops on release",
+      "passed": true
+    },
+    {
+      "name": "phone: scene swipe orbits camera without suction; a tap aims",
+      "passed": true
+    },
+    {
+      "name": "phone: suction is held only while pressed; jump does not repeat while held",
+      "passed": true
+    },
+    {
+      "name": "phone: movement, camera and suction support three simultaneous fingers",
+      "passed": true,
+      "detail": {
+        "size": [
+          0.47187984243197084,
+          1.7294257884797513,
+          0.6308557290603383
+        ],
+        "hoseLength": 2.5000000002218035,
+        "declaredLength": 2.5,
+        "visiblePixels": 7253
+      }
+    },
+    {
+      "name": "phone: pause, resume, blur and restart clear held input",
+      "passed": true
+    },
+    {
+      "name": "phone: small portrait and landscape keep touch controls clear of HUD",
+      "passed": true
+    },
+    {
+      "name": "phone: target stays out of reach until physically approaching with the stick",
+      "passed": true,
+      "detail": {
+        "initial": [
+          0.38,
+          0,
+          0.82
+        ],
+        "approached": [
+          -0.8372010043426684,
+          0,
+          0.21999999999999995
+        ],
+        "target": "cash"
+      }
+    },
+    {
+      "name": "phone: gestures used browser-trusted touch events",
+      "passed": true,
+      "detail": {
+        "trustedPointerDownCount": 32
+      }
+    },
+    {
+      "name": "phone: movement runs in the normal live animation loop",
+      "passed": true
+    },
+    {
+      "name": "desktop: touch controls hidden and keyboard movement preserved",
+      "passed": true
+    }
+  ],
+  "runtimeErrors": [],
+  "measurements": [
+    {
+      "viewport": "390x844",
+      "layout": {
+        "w": 390,
+        "h": 844,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 16,
+            "y": 686,
+            "width": 136,
+            "height": 136,
+            "right": 152,
+            "bottom": 822
+          },
+          {
+            "id": "mobile-suction",
+            "x": 268,
+            "y": 714,
+            "width": 108,
+            "height": 108,
+            "right": 376,
+            "bottom": 822
+          },
+          {
+            "id": "mobile-jump",
+            "x": 277,
+            "y": 644,
+            "width": 90,
+            "height": 54,
+            "right": 367,
+            "bottom": 698
+          },
+          {
+            "id": "mobile-reset",
+            "x": 32,
+            "y": 621,
+            "width": 100,
+            "height": 48,
+            "right": 132,
+            "bottom": 669
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 328,
+            "y": 145,
+            "width": 48,
+            "height": 48,
+            "right": 376,
+            "bottom": 193
+          },
+          {
+            "id": "pause",
+            "x": 199.109375,
+            "y": 145,
+            "width": 52.109375,
+            "height": 48,
+            "right": 251.21875,
+            "bottom": 193
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 14,
+            "y": 12,
+            "width": 184,
+            "height": 88.375,
+            "right": 198,
+            "bottom": 100.375
+          },
+          {
+            "id": "stats",
+            "x": 291,
+            "y": 12,
+            "width": 85,
+            "height": 109.5625,
+            "right": 376,
+            "bottom": 121.5625
+          },
+          {
+            "id": "fill",
+            "x": 14,
+            "y": 150,
+            "width": 123,
+            "height": 35,
+            "right": 137,
+            "bottom": 185
+          }
+        ],
+        "bodyWidth": 390
+      }
+    },
+    {
+      "viewport": "360x640",
+      "layout": {
+        "w": 360,
+        "h": 640,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 16,
+            "y": 482,
+            "width": 136,
+            "height": 136,
+            "right": 152,
+            "bottom": 618
+          },
+          {
+            "id": "mobile-suction",
+            "x": 238,
+            "y": 510,
+            "width": 108,
+            "height": 108,
+            "right": 346,
+            "bottom": 618
+          },
+          {
+            "id": "mobile-jump",
+            "x": 247,
+            "y": 440,
+            "width": 90,
+            "height": 54,
+            "right": 337,
+            "bottom": 494
+          },
+          {
+            "id": "mobile-reset",
+            "x": 32,
+            "y": 417,
+            "width": 100,
+            "height": 48,
+            "right": 132,
+            "bottom": 465
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 298,
+            "y": 145,
+            "width": 48,
+            "height": 48,
+            "right": 346,
+            "bottom": 193
+          },
+          {
+            "id": "pause",
+            "x": 175.109375,
+            "y": 145,
+            "width": 48.109375,
+            "height": 48,
+            "right": 223.21875,
+            "bottom": 193
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 14,
+            "y": 12,
+            "width": 177,
+            "height": 88.375,
+            "right": 191,
+            "bottom": 100.375
+          },
+          {
+            "id": "stats",
+            "x": 261,
+            "y": 12,
+            "width": 85,
+            "height": 109.5625,
+            "right": 346,
+            "bottom": 121.5625
+          },
+          {
+            "id": "fill",
+            "x": 14,
+            "y": 150,
+            "width": 110,
+            "height": 35,
+            "right": 124,
+            "bottom": 185
+          }
+        ],
+        "bodyWidth": 360
+      }
+    },
+    {
+      "viewport": "360x640 level3",
+      "layout": {
+        "w": 360,
+        "h": 640,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 16,
+            "y": 482,
+            "width": 136,
+            "height": 136,
+            "right": 152,
+            "bottom": 618
+          },
+          {
+            "id": "mobile-suction",
+            "x": 238,
+            "y": 510,
+            "width": 108,
+            "height": 108,
+            "right": 346,
+            "bottom": 618
+          },
+          {
+            "id": "mobile-jump",
+            "x": 247,
+            "y": 440,
+            "width": 90,
+            "height": 54,
+            "right": 337,
+            "bottom": 494
+          },
+          {
+            "id": "mobile-reset",
+            "x": 32,
+            "y": 417,
+            "width": 100,
+            "height": 48,
+            "right": 132,
+            "bottom": 465
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 298,
+            "y": 145,
+            "width": 48,
+            "height": 48,
+            "right": 346,
+            "bottom": 193
+          },
+          {
+            "id": "pause",
+            "x": 175.109375,
+            "y": 145,
+            "width": 48.109375,
+            "height": 48,
+            "right": 223.21875,
+            "bottom": 193
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 14,
+            "y": 12,
+            "width": 177,
+            "height": 127.375,
+            "right": 191,
+            "bottom": 139.375
+          },
+          {
+            "id": "stats",
+            "x": 261,
+            "y": 12,
+            "width": 85,
+            "height": 109.5625,
+            "right": 346,
+            "bottom": 121.5625
+          },
+          {
+            "id": "fill",
+            "x": 14,
+            "y": 150,
+            "width": 110,
+            "height": 35,
+            "right": 124,
+            "bottom": 185
+          }
+        ],
+        "bodyWidth": 360
+      }
+    },
+    {
+      "viewport": "667x375",
+      "layout": {
+        "w": 667,
+        "h": 375,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 18,
+            "y": 236,
+            "width": 120,
+            "height": 120,
+            "right": 138,
+            "bottom": 356
+          },
+          {
+            "id": "mobile-suction",
+            "x": 557,
+            "y": 262,
+            "width": 94,
+            "height": 94,
+            "right": 651,
+            "bottom": 356
+          },
+          {
+            "id": "mobile-jump",
+            "x": 560,
+            "y": 200,
+            "width": 88,
+            "height": 48,
+            "right": 648,
+            "bottom": 248
+          },
+          {
+            "id": "mobile-reset",
+            "x": 28,
+            "y": 172,
+            "width": 96,
+            "height": 48,
+            "right": 124,
+            "bottom": 220
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 373.9453125,
+            "y": 9,
+            "width": 48,
+            "height": 48,
+            "right": 421.9453125,
+            "bottom": 57
+          },
+          {
+            "id": "pause",
+            "x": 245.0546875,
+            "y": 9,
+            "width": 52.109375,
+            "height": 48,
+            "right": 297.1640625,
+            "bottom": 57
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 16,
+            "y": 9,
+            "width": 170,
+            "height": 79,
+            "right": 186,
+            "bottom": 88
+          },
+          {
+            "id": "stats",
+            "x": 574,
+            "y": 9,
+            "width": 77,
+            "height": 102.734375,
+            "right": 651,
+            "bottom": 111.734375
+          },
+          {
+            "id": "fill",
+            "x": 263.5,
+            "y": 67,
+            "width": 140,
+            "height": 31,
+            "right": 403.5,
+            "bottom": 98
+          }
+        ],
+        "bodyWidth": 667
+      }
+    },
+    {
+      "viewport": "667x375 level3",
+      "layout": {
+        "w": 667,
+        "h": 375,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 18,
+            "y": 236,
+            "width": 120,
+            "height": 120,
+            "right": 138,
+            "bottom": 356
+          },
+          {
+            "id": "mobile-suction",
+            "x": 557,
+            "y": 262,
+            "width": 94,
+            "height": 94,
+            "right": 651,
+            "bottom": 356
+          },
+          {
+            "id": "mobile-jump",
+            "x": 560,
+            "y": 200,
+            "width": 88,
+            "height": 48,
+            "right": 648,
+            "bottom": 248
+          },
+          {
+            "id": "mobile-reset",
+            "x": 28,
+            "y": 172,
+            "width": 96,
+            "height": 48,
+            "right": 124,
+            "bottom": 220
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 373.9453125,
+            "y": 9,
+            "width": 48,
+            "height": 48,
+            "right": 421.9453125,
+            "bottom": 57
+          },
+          {
+            "id": "pause",
+            "x": 245.0546875,
+            "y": 9,
+            "width": 52.109375,
+            "height": 48,
+            "right": 297.1640625,
+            "bottom": 57
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 16,
+            "y": 9,
+            "width": 170,
+            "height": 115.421875,
+            "right": 186,
+            "bottom": 124.421875
+          },
+          {
+            "id": "stats",
+            "x": 574,
+            "y": 9,
+            "width": 77,
+            "height": 102.734375,
+            "right": 651,
+            "bottom": 111.734375
+          },
+          {
+            "id": "fill",
+            "x": 263.5,
+            "y": 67,
+            "width": 140,
+            "height": 31,
+            "right": 403.5,
+            "bottom": 98
+          }
+        ],
+        "bodyWidth": 667
+      }
+    },
+    {
+      "viewport": "844x390",
+      "layout": {
+        "w": 844,
+        "h": 390,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 18,
+            "y": 251,
+            "width": 120,
+            "height": 120,
+            "right": 138,
+            "bottom": 371
+          },
+          {
+            "id": "mobile-suction",
+            "x": 734,
+            "y": 277,
+            "width": 94,
+            "height": 94,
+            "right": 828,
+            "bottom": 371
+          },
+          {
+            "id": "mobile-jump",
+            "x": 737,
+            "y": 215,
+            "width": 88,
+            "height": 48,
+            "right": 825,
+            "bottom": 263
+          },
+          {
+            "id": "mobile-reset",
+            "x": 28,
+            "y": 187,
+            "width": 96,
+            "height": 48,
+            "right": 124,
+            "bottom": 235
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 462.4453125,
+            "y": 9,
+            "width": 48,
+            "height": 48,
+            "right": 510.4453125,
+            "bottom": 57
+          },
+          {
+            "id": "pause",
+            "x": 333.5546875,
+            "y": 9,
+            "width": 52.109375,
+            "height": 48,
+            "right": 385.6640625,
+            "bottom": 57
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 16,
+            "y": 9,
+            "width": 170,
+            "height": 79,
+            "right": 186,
+            "bottom": 88
+          },
+          {
+            "id": "stats",
+            "x": 751,
+            "y": 9,
+            "width": 77,
+            "height": 102.734375,
+            "right": 828,
+            "bottom": 111.734375
+          },
+          {
+            "id": "fill",
+            "x": 352,
+            "y": 67,
+            "width": 140,
+            "height": 31,
+            "right": 492,
+            "bottom": 98
+          }
+        ],
+        "bodyWidth": 844
+      }
+    },
+    {
+      "viewport": "844x390 level3",
+      "layout": {
+        "w": 844,
+        "h": 390,
+        "controls": [
+          {
+            "id": "move-stick",
+            "x": 18,
+            "y": 251,
+            "width": 120,
+            "height": 120,
+            "right": 138,
+            "bottom": 371
+          },
+          {
+            "id": "mobile-suction",
+            "x": 734,
+            "y": 277,
+            "width": 94,
+            "height": 94,
+            "right": 828,
+            "bottom": 371
+          },
+          {
+            "id": "mobile-jump",
+            "x": 737,
+            "y": 215,
+            "width": 88,
+            "height": 48,
+            "right": 825,
+            "bottom": 263
+          },
+          {
+            "id": "mobile-reset",
+            "x": 28,
+            "y": 187,
+            "width": 96,
+            "height": 48,
+            "right": 124,
+            "bottom": 235
+          },
+          {
+            "id": "mobile-help-toggle",
+            "x": 462.4453125,
+            "y": 9,
+            "width": 48,
+            "height": 48,
+            "right": 510.4453125,
+            "bottom": 57
+          },
+          {
+            "id": "pause",
+            "x": 333.5546875,
+            "y": 9,
+            "width": 52.109375,
+            "height": 48,
+            "right": 385.6640625,
+            "bottom": 57
+          }
+        ],
+        "hud": [
+          {
+            "id": "order",
+            "x": 16,
+            "y": 9,
+            "width": 170,
+            "height": 115.421875,
+            "right": 186,
+            "bottom": 124.421875
+          },
+          {
+            "id": "stats",
+            "x": 751,
+            "y": 9,
+            "width": 77,
+            "height": 102.734375,
+            "right": 828,
+            "bottom": 111.734375
+          },
+          {
+            "id": "fill",
+            "x": 352,
+            "y": 67,
+            "width": 140,
+            "height": 31,
+            "right": 492,
+            "bottom": 98
+          }
+        ],
+        "bodyWidth": 844
+      }
+    }
+  ]
+}
