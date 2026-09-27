@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "level 1: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 2: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 3: complete target order",
+      "passed": true
+    },
+    {
+      "name": "extra item counts as mistake and fills bag",
+      "passed": true
+    },
+    {
+      "name": "timeout ends level",
+      "passed": true
+    },
+    {
+      "name": "capacity overflow ends level",
+      "passed": true
+    },
+    {
+      "name": "tracker reduces remaining time",
+      "passed": true
+    },
+    {
+      "name": "dye pack stains the bag",
+      "passed": true
+    },
+    {
+      "name": "movement stops at the solid table",
+      "passed": true
+    },
+    {
+      "name": "camera orbit and reset return behind the player",
+      "passed": true
+    },
+    {
+      "name": "mouse drag changes yaw and pitch; release stops orbit",
+      "passed": true
+    },
+    {
+      "name": "camera stays inside room through complete orbits and pitch limits",
+      "passed": true
+    },
+    {
+      "name": "zoom uses bounded wheel input",
+      "passed": true
+    },
+    {
+      "name": "pause freezes countdown and resumes",
+      "passed": true
+    },
+    {
+      "name": "geometry and hose attachments remain finite",
+      "passed": true
+    },
+    {
+      "name": "all visible material maps loaded",
+      "passed": true
+    }
+  ],
+  "render": {
+    "calls": 370,
+    "triangles": 210398,
+    "geometries": 236,
+    "textures": 17
+  }
+}

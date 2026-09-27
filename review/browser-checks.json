@@ -1,0 +1,229 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "generated character and handbag finish loading before gameplay checks",
+      "passed": true
+    },
+    {
+      "name": "level 1: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 2: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 3: complete target order",
+      "passed": true
+    },
+    {
+      "name": "extra item counts as mistake and fills bag",
+      "passed": true
+    },
+    {
+      "name": "timeout ends level",
+      "passed": true
+    },
+    {
+      "name": "capacity overflow ends level",
+      "passed": true
+    },
+    {
+      "name": "tracker reduces remaining time",
+      "passed": true
+    },
+    {
+      "name": "dye pack stains the bag",
+      "passed": true
+    },
+    {
+      "name": "movement stops at the solid table",
+      "passed": true
+    },
+    {
+      "name": "camera orbit and reset return behind the player",
+      "passed": true
+    },
+    {
+      "name": "mouse drag changes yaw and pitch; release stops orbit",
+      "passed": true
+    },
+    {
+      "name": "camera stays inside room through complete orbits and pitch limits",
+      "passed": true
+    },
+    {
+      "name": "zoom uses bounded wheel input",
+      "passed": true
+    },
+    {
+      "name": "pause freezes countdown and resumes",
+      "passed": true
+    },
+    {
+      "name": "pause freezes the last travelling item and resume still completes the level",
+      "passed": true
+    },
+    {
+      "name": "restart clears held movement, suction and camera drag",
+      "passed": true
+    },
+    {
+      "name": "Space follows one jump arc, carries the hands and bag, and lands without held-key bouncing",
+      "passed": true
+    },
+    {
+      "name": "airborne Space cannot double jump, pause freezes the arc, and restart grounds the player",
+      "passed": true
+    },
+    {
+      "name": "repeated jumps restore the original grounded leg pose without accumulated bending",
+      "passed": true
+    },
+    {
+      "name": "level 2 keys stay above the rendered cloth and visibly render across seeded placements",
+      "passed": true
+    },
+    {
+      "name": "level 2 completes from the original table layout, including keys, without moving or hiding items",
+      "passed": true
+    },
+    {
+      "name": "clean view keeps the lost-level menu and HUD restore button accessible",
+      "passed": true
+    },
+    {
+      "name": "geometry and hose attachments remain finite",
+      "passed": true
+    },
+    {
+      "name": "loaded character stays visible and attached while walking W",
+      "passed": true
+    },
+    {
+      "name": "loaded character stays visible and attached while walking A",
+      "passed": true
+    },
+    {
+      "name": "loaded character stays visible and attached while walking S",
+      "passed": true
+    },
+    {
+      "name": "loaded character stays visible and attached while walking D",
+      "passed": true
+    },
+    {
+      "name": "original character material remains visible in the complete room at wall camera angles",
+      "passed": true
+    },
+    {
+      "name": "walking deforms lower-body vertices rather than only moving the whole model",
+      "passed": true
+    },
+    {
+      "name": "all visible material maps loaded",
+      "passed": true
+    },
+    {
+      "name": "delayed models keep loading gate closed, then Space and Enter activate menu buttons",
+      "passed": true
+    },
+    {
+      "name": "runtime scripts, styles, models and textures share one explicit release version",
+      "passed": true
+    },
+    {
+      "name": "failed character load offers retry, blocks play, and reload recovers",
+      "passed": true
+    }
+  ],
+  "render": {
+    "calls": 166,
+    "triangles": 128792,
+    "geometries": 211,
+    "textures": 26
+  },
+  "runtimeVersions": {
+    "expected": "1.0.2",
+    "requests": [
+      {
+        "path": "/look.css",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/vendor/three.min.js",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/vendor/GLTFLoader.js",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/visuals.js",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/game.js",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/models/hero.glb",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/models/bag.glb",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/WoodFloor051-Color.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/WoodFloor051-NormalGL.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/WoodFloor051-Roughness.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Leather037-Color.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Leather037-NormalGL.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Leather037-Roughness.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Fabric030-Color.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Fabric030-NormalGL.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Fabric030-Roughness.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Plaster003-Color.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Plaster003-NormalGL.jpg",
+        "version": "1.0.2"
+      },
+      {
+        "path": "/assets/textures/Plaster003-Roughness.jpg",
+        "version": "1.0.2"
+      }
+    ]
+  },
+  "runtimeErrors": []
+}

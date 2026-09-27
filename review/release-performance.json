@@ -1,0 +1,61 @@
+{
+  "route": "http://127.0.0.1:8765/",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "environment": "isolated headless Chromium; normal live game loop, no manual simulation stepping",
+  "browserVersion": "153.0.8010.54",
+  "recording": {
+    "seconds": 11,
+    "trimSeconds": 0.971,
+    "inputs": [
+      "W",
+      "A",
+      "right mouse drag",
+      "D",
+      "S",
+      "V",
+      "W",
+      "Space",
+      "P"
+    ],
+    "finalState": {
+      "state": "paused",
+      "characterVisible": true,
+      "position": [
+        1.3804830214972934,
+        0,
+        1.1039661814216686
+      ],
+      "ready": true
+    }
+  },
+  "framePacing": {
+    "durationMs": 5006.500000047683,
+    "frames": 301,
+    "averageMs": 16.63289036560692,
+    "p95Ms": 16.700000000000728,
+    "maxMs": 16.80000000000109,
+    "averageFps": 60.121841605339704,
+    "framesOver33ms": 0
+  },
+  "renderInfo": {
+    "render": {
+      "frame": 1007,
+      "calls": 323,
+      "triangles": 207320,
+      "points": 0,
+      "lines": 0
+    },
+    "memory": {
+      "geometries": 211,
+      "textures": 26
+    },
+    "programs": 20,
+    "pixelRatio": 1,
+    "version": "128",
+    "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Max, Unspecified Version)"
+  },
+  "errors": []
+}

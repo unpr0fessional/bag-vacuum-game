@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "level 1: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 2: complete target order",
+      "passed": true
+    },
+    {
+      "name": "level 3: complete target order",
+      "passed": true
+    },
+    {
+      "name": "extra item counts as mistake and fills bag",
+      "passed": true
+    },
+    {
+      "name": "timeout ends level",
+      "passed": true
+    },
+    {
+      "name": "capacity overflow ends level",
+      "passed": true
+    },
+    {
+      "name": "tracker reduces remaining time",
+      "passed": true
+    },
+    {
+      "name": "dye pack stains the bag",
+      "passed": true
+    },
+    {
+      "name": "movement stops at the solid table",
+      "passed": true
+    },
+    {
+      "name": "free camera rotates and reset restores reference angle",
+      "passed": true
+    },
+    {
+      "name": "pause freezes countdown and resumes",
+      "passed": true
+    },
+    {
+      "name": "geometry and hose attachments remain finite",
+      "passed": true
+    },
+    {
+      "name": "all visible material maps loaded",
+      "passed": true
+    }
+  ],
+  "render": {
+    "calls": 339,
+    "triangles": 206292,
+    "geometries": 235,
+    "textures": 17
+  }
+}

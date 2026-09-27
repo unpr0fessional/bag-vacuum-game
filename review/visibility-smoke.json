@@ -1,0 +1,1208 @@
+{
+  "passed": true,
+  "version": "97e4c2cab4d58cf9",
+  "durationMs": 52558,
+  "sampleCount": 63,
+  "minVisiblePixels": 475,
+  "method": "Normal live loop; actual keyboard/mouse events; original character material rendered in full scene, compared with hidden character, excluding its shadow",
+  "samples": [
+    {
+      "label": "start",
+      "elapsedMs": 906,
+      "pixels": 963,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.38,
+        0,
+        0.82
+      ],
+      "camera": [
+        1.7872268573615022,
+        1.4265729185814386,
+        1.7127566117048372
+      ],
+      "moveAmount": 0,
+      "state": "playing"
+    },
+    {
+      "label": "w-0",
+      "elapsedMs": 1454,
+      "pixels": 946,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -0.31325292631371127,
+        0,
+        0.21999999999999995
+      ],
+      "camera": [
+        1.093973931047791,
+        1.4265729185814386,
+        1.112756611704837
+      ],
+      "moveAmount": 0.862260219511199,
+      "state": "playing"
+    },
+    {
+      "label": "w-400",
+      "elapsedMs": 2013,
+      "pixels": 963,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -0.9432350455469095,
+        0,
+        0.21999999999999995
+      ],
+      "camera": [
+        0.4639918118145927,
+        1.4265729185814386,
+        1.112756611704837
+      ],
+      "moveAmount": 0.7181020178091412,
+      "state": "playing"
+    },
+    {
+      "label": "w-800",
+      "elapsedMs": 4582,
+      "pixels": 932,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.713838147879769,
+        0,
+        0.2168366489149624
+      ],
+      "camera": [
+        -0.30661129051826697,
+        1.4265729185814386,
+        1.1095932606197996
+      ],
+      "moveAmount": 0.0019916883605924428,
+      "state": "playing"
+    },
+    {
+      "label": "w-1200",
+      "elapsedMs": 5322,
+      "pixels": 929,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.7137929926803406,
+        0,
+        0.2168440493635063
+      ],
+      "camera": [
+        -0.3065661353188385,
+        1.4265729185814386,
+        1.1096006610683435
+      ],
+      "moveAmount": 0.006775301805479935,
+      "state": "playing"
+    },
+    {
+      "label": "w-1600",
+      "elapsedMs": 5950,
+      "pixels": 929,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.7120591857946426,
+        0,
+        0.21712152316531316
+      ],
+      "camera": [
+        -0.30483232843314045,
+        1.4265729185814386,
+        1.1098781348701503
+      ],
+      "moveAmount": 0.03962412576105476,
+      "state": "playing"
+    },
+    {
+      "label": "s-0",
+      "elapsedMs": 9407,
+      "pixels": 903,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -0.7451709810699847,
+        0,
+        0.33410447714190433
+      ],
+      "camera": [
+        0.6620558762915175,
+        1.4265729185814386,
+        1.2268610888467415
+      ],
+      "moveAmount": 0.8078914467883486,
+      "state": "playing"
+    },
+    {
+      "label": "s-400",
+      "elapsedMs": 9995,
+      "pixels": 874,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.06568435648790757,
+        0,
+        1.1067249282979723
+      ],
+      "camera": [
+        1.4729112138494098,
+        1.4265729185814386,
+        1.9994815400028094
+      ],
+      "moveAmount": 0.9997665388058055,
+      "state": "playing"
+    },
+    {
+      "label": "s-800",
+      "elapsedMs": 10535,
+      "pixels": 1745,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.7563548006007308,
+        0,
+        1.777514147858094
+      ],
+      "camera": [
+        1.79,
+        1.3478653616860867,
+        2.307442798814799
+      ],
+      "moveAmount": 0.9999992765936099,
+      "state": "playing"
+    },
+    {
+      "label": "s-1200",
+      "elapsedMs": 11118,
+      "pixels": 2778,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.4943707467129224,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.7823099134247709,
+        1.38,
+        1.7350923946644743
+      ],
+      "moveAmount": 0.9184952326599,
+      "state": "playing"
+    },
+    {
+      "label": "s-1600",
+      "elapsedMs": 11766,
+      "pixels": 4083,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 0.006822937442484226,
+      "state": "playing"
+    },
+    {
+      "label": "s-2000",
+      "elapsedMs": 12285,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 0.000014348499432556003,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-0",
+      "elapsedMs": 12603,
+      "pixels": 4304,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0.3676912803118896,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.5822302041715393,
+        1.6800831518391042
+      ],
+      "moveAmount": 0.0000013063609448827397,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-1",
+      "elapsedMs": 12896,
+      "pixels": 4307,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0.334315519815521,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.5638735358985365,
+        1.6800831518391042
+      ],
+      "moveAmount": 8.981936941845894e-8,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-2",
+      "elapsedMs": 13154,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 7.429069731822304e-9,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-3",
+      "elapsedMs": 13386,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 8.088034442079271e-10,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-4",
+      "elapsedMs": 13620,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 1.156254314469747e-10,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-5",
+      "elapsedMs": 13864,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 1.1097900263459011e-11,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-6",
+      "elapsedMs": 14071,
+      "pixels": 4084,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        2.46
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.6800831518391042
+      ],
+      "moveAmount": 1.8234967062213185e-12,
+      "state": "playing"
+    },
+    {
+      "label": "d-0",
+      "elapsedMs": 14667,
+      "pixels": 3615,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        1.849960380572695
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        1.0700435324117992
+      ],
+      "moveAmount": 0.7129930365122593,
+      "state": "playing"
+    },
+    {
+      "label": "d-400",
+      "elapsedMs": 15235,
+      "pixels": 3392,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        1.055129831856024
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        0.27521298369512814
+      ],
+      "moveAmount": 0.7173504337076214,
+      "state": "playing"
+    },
+    {
+      "label": "d-800",
+      "elapsedMs": 15800,
+      "pixels": 3381,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        0.40721381069239976
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        -0.37270303746849615
+      ],
+      "moveAmount": 0.7173560658342603,
+      "state": "playing"
+    },
+    {
+      "label": "d-1200",
+      "elapsedMs": 16339,
+      "pixels": 3196,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -0.336110570902923
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        -1.1160274190638189
+      ],
+      "moveAmount": 0.7173560908495221,
+      "state": "playing"
+    },
+    {
+      "label": "d-1600",
+      "elapsedMs": 16882,
+      "pixels": 3058,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.005403803712178
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        -1.7853206518730738
+      ],
+      "moveAmount": 0.7173560908993379,
+      "state": "playing"
+    },
+    {
+      "label": "d-2000",
+      "elapsedMs": 17443,
+      "pixels": 2958,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.6752709211889152
+      ],
+      "camera": [
+        1.6986109721760756,
+        1.38,
+        -2.455187769349811
+      ],
+      "moveAmount": 0.7173560908995221,
+      "state": "playing"
+    },
+    {
+      "label": "orbit-1-3",
+      "elapsedMs": 18413,
+      "pixels": 2958,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.7884697121276227
+      ],
+      "camera": [
+        1.79,
+        1.4723979553975013,
+        -0.9494301511186548
+      ],
+      "moveAmount": 0.00007583255115117762,
+      "state": "playing"
+    },
+    {
+      "label": "orbit-1-6",
+      "elapsedMs": 18953,
+      "pixels": 775,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.7884697121276227
+      ],
+      "camera": [
+        1.105131693176661,
+        1.7581628649401515,
+        -0.2106216086736612
+      ],
+      "moveAmount": 2.0493296276045707e-7,
+      "state": "playing"
+    },
+    {
+      "label": "orbit-1-9",
+      "elapsedMs": 19487,
+      "pixels": 681,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.7884697121276227
+      ],
+      "camera": [
+        0.37726779088413,
+        1.6630006341421493,
+        -0.4803262958836656
+      ],
+      "moveAmount": 4.351271088124029e-10,
+      "state": "playing"
+    },
+    {
+      "label": "orbit-1-12",
+      "elapsedMs": 20569,
+      "pixels": 776,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.71,
+        0,
+        -1.7884697121276227
+      ],
+      "camera": [
+        -0.05309157326158376,
+        1.4265729185814386,
+        -1.1514004377702107
+      ],
+      "moveAmount": 5.95954103750329e-15,
+      "state": "playing"
+    },
+    {
+      "label": "a-0",
+      "elapsedMs": 21216,
+      "pixels": 679,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.5303794401758222,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.05309157326158376,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.3292000487161426,
+      "state": "playing"
+    },
+    {
+      "label": "a-400",
+      "elapsedMs": 21704,
+      "pixels": 765,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.350610310787802,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.18933921289534483,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.18614286723733675,
+      "state": "playing"
+    },
+    {
+      "label": "a-800",
+      "elapsedMs": 22196,
+      "pixels": 723,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.1651955393021165,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.37475398438103036,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.18571298906413944,
+      "state": "playing"
+    },
+    {
+      "label": "a-1200",
+      "elapsedMs": 23256,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.8988475172628503,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.6411020064202967,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.1857119107223493,
+      "state": "playing"
+    },
+    {
+      "label": "a-1600",
+      "elapsedMs": 23827,
+      "pixels": 769,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.5708059984941085,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.9691435251890385,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.18571191052481925,
+      "state": "playing"
+    },
+    {
+      "label": "a-2000",
+      "elapsedMs": 24378,
+      "pixels": 750,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.36028297674089066,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -1.1796665469422563,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.18571191052481387,
+      "state": "playing"
+    },
+    {
+      "label": "a-2400",
+      "elapsedMs": 24905,
+      "pixels": 760,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.18077384404531657,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -1.3591756796378305,
+        1.4265729185814386,
+        -1.822930725642588
+      ],
+      "moveAmount": 0.1857119105248137,
+      "state": "playing"
+    },
+    {
+      "label": "s-0",
+      "elapsedMs": 25733,
+      "pixels": 2698,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -0.9869769198808709,
+        0,
+        -2.249811259632593
+      ],
+      "camera": [
+        -1.79,
+        1.31322561702977,
+        -1.752020865435815
+      ],
+      "moveAmount": 0.9989522063497555,
+      "state": "playing"
+    },
+    {
+      "label": "s-400",
+      "elapsedMs": 26404,
+      "pixels": 2490,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.989666015422566
+      ],
+      "camera": [
+        -1.5651447097906455,
+        1.38,
+        -1.2232347106741472
+      ],
+      "moveAmount": 0.200668840847846,
+      "state": "playing"
+    },
+    {
+      "label": "s-800",
+      "elapsedMs": 27051,
+      "pixels": 2427,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.7359835456456705
+      ],
+      "camera": [
+        -1.5651447097906455,
+        1.38,
+        -0.9695522408972517
+      ],
+      "moveAmount": 0.18571603496392772,
+      "state": "playing"
+    },
+    {
+      "label": "s-1200",
+      "elapsedMs": 27667,
+      "pixels": 2399,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.5377175098985358
+      ],
+      "camera": [
+        -1.5651447097906455,
+        1.38,
+        -0.771286205150117
+      ],
+      "moveAmount": 0.1857119173395346,
+      "state": "playing"
+    },
+    {
+      "label": "s-1600",
+      "elapsedMs": 28288,
+      "pixels": 2246,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.7109761705009512,
+        0,
+        -1.317288253304049
+      ],
+      "camera": [
+        -1.5661208802915967,
+        1.38,
+        -0.5508569485556303
+      ],
+      "moveAmount": 0.14442221350940754,
+      "state": "playing"
+    },
+    {
+      "label": "orbit--1-3",
+      "elapsedMs": 30151,
+      "pixels": 3463,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -1.7510105140807957,
+        1.38,
+        -0.5385130643670906
+      ],
+      "moveAmount": 8.841117717561e-11,
+      "state": "playing"
+    },
+    {
+      "label": "orbit--1-6",
+      "elapsedMs": 31586,
+      "pixels": 799,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -1.79,
+        1.7071388743507863,
+        0.1298034292216197
+      ],
+      "moveAmount": 1.0980204396424724e-18,
+      "state": "playing"
+    },
+    {
+      "label": "orbit--1-9",
+      "elapsedMs": 32534,
+      "pixels": 618,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.9844623594439085,
+        1.6630006341421493,
+        0.12423341615992745
+      ],
+      "moveAmount": 3.3402124830720357e-23,
+      "state": "playing"
+    },
+    {
+      "label": "orbit--1-12",
+      "elapsedMs": 33532,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 9.284487361032672e-29,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-0",
+      "elapsedMs": 34076,
+      "pixels": 1059,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0.4338028801425171,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.6651645026598232,
+        -0.4246775897068382
+      ],
+      "moveAmount": 4.592847771996154e-32,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-1",
+      "elapsedMs": 34344,
+      "pixels": 855,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0.02878568017532345,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4424050426778665,
+        -0.4246775897068382
+      ],
+      "moveAmount": 5.103289606069853e-33,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-2",
+      "elapsedMs": 34576,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 2.0868806670976133e-34,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-3",
+      "elapsedMs": 35056,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 1.1434392790926432e-36,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-4",
+      "elapsedMs": 35353,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 2.1077284818493343e-38,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-5",
+      "elapsedMs": 35765,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 3.861983861741371e-40,
+      "state": "playing"
+    },
+    {
+      "label": "real-space-jump-6",
+      "elapsedMs": 36236,
+      "pixels": 836,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -1.3174342014116753
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -0.4246775897068382
+      ],
+      "moveAmount": 1.7484876057049857e-42,
+      "state": "playing"
+    },
+    {
+      "label": "w-0",
+      "elapsedMs": 37223,
+      "pixels": 737,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.3386668961056363
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 0.6966011450931823,
+      "state": "playing"
+    },
+    {
+      "label": "w-400",
+      "elapsedMs": 38047,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 0.00009368492963641051,
+      "state": "playing"
+    },
+    {
+      "label": "w-800",
+      "elapsedMs": 39249,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 2.257544485946977e-10,
+      "state": "playing"
+    },
+    {
+      "label": "w-1200",
+      "elapsedMs": 39898,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 6.74646109048549e-14,
+      "state": "playing"
+    },
+    {
+      "label": "w-1600",
+      "elapsedMs": 40404,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 2.585162244769744e-16,
+      "state": "playing"
+    },
+    {
+      "label": "w-2000",
+      "elapsedMs": 41082,
+      "pixels": 744,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.71,
+        0,
+        -2.46
+      ],
+      "camera": [
+        -0.30277314263849786,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 1.761813277605458e-19,
+      "state": "playing"
+    },
+    {
+      "label": "d-0",
+      "elapsedMs": 41945,
+      "pixels": 475,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -1.0174735309089178,
+        0,
+        -2.46
+      ],
+      "camera": [
+        0.3897533264525844,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 0.6949164427742685,
+      "state": "playing"
+    },
+    {
+      "label": "d-400",
+      "elapsedMs": 42394,
+      "pixels": 584,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        -0.10659917904199057,
+        0,
+        -2.46
+      ],
+      "camera": [
+        1.3006276783195116,
+        1.4265729185814386,
+        -1.1633423173893254
+      ],
+      "moveAmount": 0.6967060076688286,
+      "state": "playing"
+    },
+    {
+      "label": "d-800",
+      "elapsedMs": 43001,
+      "pixels": 631,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        0.6381802932501293,
+        0,
+        -2.46
+      ],
+      "camera": [
+        1.79,
+        1.372762801275634,
+        -1.4113974711738768
+      ],
+      "moveAmount": 0.6967067081974951,
+      "state": "playing"
+    },
+    {
+      "label": "d-1200",
+      "elapsedMs": 43450,
+      "pixels": 3008,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.379476231995513,
+        0,
+        -2.46
+      ],
+      "camera": [
+        1.688459578110812,
+        1.38,
+        -1.743809179182396
+      ],
+      "moveAmount": 0.6967067093452237,
+      "state": "playing"
+    },
+    {
+      "label": "stopped",
+      "elapsedMs": 44915,
+      "pixels": 3358,
+      "rootVisible": true,
+      "meshVisible": true,
+      "position": [
+        1.4265736054809381,
+        0,
+        -2.46
+      ],
+      "camera": [
+        1.7355569515962372,
+        1.38,
+        -1.743809179182396
+      ],
+      "moveAmount": 2.5423908093829474e-7,
+      "state": "playing"
+    }
+  ],
+  "errors": []
+}

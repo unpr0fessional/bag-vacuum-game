@@ -1,0 +1,27 @@
+{
+  "model": "image_to_3d",
+  "medias": [
+    {
+      "role": "image",
+      "value": "b1b58c23-5aa9-4c1e-934f-c1a6a5174279"
+    }
+  ],
+  "should_texture": true,
+  "enable_pbr": true,
+  "enable_rigging": true,
+  "enable_animation": true,
+  "animation_action_id": 30,
+  "rigging_height_meters": 1.74,
+  "pose_mode": "a-pose",
+  "target_polycount": 22000,
+  "topology": "triangle",
+  "texture_prompt": "Realistic black leather hooded jacket and shorts, black ankle boots, dark hair, natural skin, silver zipper. Preserve source character.",
+  "status": "submitted",
+  "reason": "Higgsfield CLI updated to 1.1.26, authentication confirmed. Character generation completed with textured PBR rigged GLB.",
+  "job_id": "597ca994-a5e6-48d1-8887-d0e1571d0a18",
+  "character_status": "completed",
+  "character_url": "assets/models/hero.glb",
+  "bag_job_id": "3bd0acb9-973c-45a8-a1fe-3ba390d20a39",
+  "bag_status": "completed",
+  "bag_url": "assets/models/bag.glb"
+}
