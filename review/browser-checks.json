@@ -86,7 +86,23 @@
       "passed": true
     },
     {
-      "name": "level 2 completes from the original table layout, including keys, without moving or hiding items",
+      "name": "level 1: walk to collect the original layout without moving or hiding items",
+      "passed": true
+    },
+    {
+      "name": "level 2: walk to collect the original layout without moving or hiding items",
+      "passed": true
+    },
+    {
+      "name": "level 3: walk to collect the original layout without moving or hiding items",
+      "passed": true
+    },
+    {
+      "name": "distant target cannot be collected while standing at the start",
+      "passed": true
+    },
+    {
+      "name": "hose keeps its complete length, fixed rib count and attachments during aiming, walking and jumping",
       "passed": true
     },
     {
@@ -140,88 +156,92 @@
   ],
   "render": {
     "calls": 166,
-    "triangles": 128792,
+    "triangles": 128016,
     "geometries": 211,
-    "textures": 26
+    "textures": 25
   },
   "runtimeVersions": {
-    "expected": "1.0.2",
+    "expected": "1.0.3",
     "requests": [
       {
         "path": "/look.css",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/vendor/three.min.js",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/vendor/GLTFLoader.js",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/visuals.js",
-        "version": "1.0.2"
+        "version": "1.0.3"
+      },
+      {
+        "path": "/fixed-hose.js",
+        "version": "1.0.3"
       },
       {
         "path": "/game.js",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/models/hero.glb",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/models/bag.glb",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/WoodFloor051-Color.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/WoodFloor051-NormalGL.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/WoodFloor051-Roughness.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Leather037-Color.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Leather037-NormalGL.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Leather037-Roughness.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Fabric030-Color.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Fabric030-NormalGL.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Fabric030-Roughness.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Plaster003-Color.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Plaster003-NormalGL.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       },
       {
         "path": "/assets/textures/Plaster003-Roughness.jpg",
-        "version": "1.0.2"
+        "version": "1.0.3"
       }
     ]
   },
